@@ -10,7 +10,7 @@ COPY . .
 # Build the project using Maven
 RUN mvn clean install
 # Use official ubuntu image as the base image
-#FROM ubuntu:latest
+FROM ubuntu:latest
 
 # Set environment variables for MySQL database credentials
 #ENV MYSQL_USER=myuser
@@ -18,8 +18,8 @@ RUN mvn clean install
 #ENV MYSQL_DATABASE=mydb
 
 # Install Apache and MySQL
-#RUN apt-get update && \
- #   apt-get install -y apache2 mysql-server
+RUN apt-get update && \
+    apt-get install -y apache2 mysql-server
 
 # Copy the built project from the previous stage
 COPY --from=build /app/target/my-app-1.0-SNAPSHOT.jar /app/
@@ -28,5 +28,5 @@ COPY --from=build /app/target/my-app-1.0-SNAPSHOT.jar /app/
 EXPOSE 8080
 
 # Start Apache and MySQL on container startup
-#CMD ["service", "apache2", "start"] && ["service", "mysql", "start"] && ["java", "-jar", "/app/my-app-1.0-SNAPSHOT.jar"]
-CMD ["java", "-jar", "/app/my-app-1.0-SNAPSHOT.jar"]
+CMD ["service", "apache2", "start"] && ["service", "mysql", "start"] && ["java", "-jar", "/app/my-app-1.0-SNAPSHOT.jar"]##
+#CMD ["java", "-jar", "/app/my-app-1.0-SNAPSHOT.jar"]
