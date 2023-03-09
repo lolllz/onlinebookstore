@@ -1,5 +1,5 @@
 # Use official maven image as the base image
-FROM maven:alpine AS build
+FROM maven:3.6.3-jdk-8 AS build
 
 # Set working directory
 WORKDIR /app
